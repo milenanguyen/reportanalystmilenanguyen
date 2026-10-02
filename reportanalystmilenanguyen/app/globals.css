@@ -1,0 +1,488 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f5f0fb;
+  --foreground: #252333;
+  --report-border: #e8e3ef;
+  --muted-foreground: #777487;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.dashboard-canvas {
+  background:
+    radial-gradient(ellipse at 7% 2%, rgb(124 77 255 / 12%), transparent 33%),
+    radial-gradient(ellipse at 94% 96%, rgb(229 106 174 / 13%), transparent 32%),
+    linear-gradient(135deg, #f0eaff 0%, #faf7fc 53%, #fdf0f6 100%);
+}
+
+.dashboard-shell {
+  min-height: calc(100vh - 4rem);
+  padding: 28px;
+  border: 1px solid rgb(255 255 255 / 85%);
+  border-radius: 28px;
+  background: rgb(255 255 255 / 96%);
+  box-shadow: 0 24px 70px rgb(65 44 101 / 10%), 0 2px 8px rgb(65 44 101 / 4%);
+}
+
+.dashboard-header {
+  border-color: var(--report-border);
+}
+
+.dashboard-section {
+  padding: 22px;
+  border: 1px solid var(--report-border);
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgb(52 39 76 / 3%);
+}
+
+.metric-chip {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  background: #fff;
+  box-shadow: 0 4px 14px rgb(52 39 76 / 4%);
+}
+
+.metric-chip-roas {
+  border-color: #e5dcff;
+  background: linear-gradient(135deg, #faf7ff, #fff);
+  box-shadow: inset 3px 0 #7c4dff, 0 4px 14px rgb(52 39 76 / 4%);
+}
+
+.metric-chip-cpi {
+  border-color: #f2ddec;
+  background: linear-gradient(135deg, #fff8fc, #fff);
+  box-shadow: inset 3px 0 #c84dad, 0 4px 14px rgb(52 39 76 / 4%);
+}
+
+.metric-chip-uv {
+  border-color: #e1e5fa;
+  background: linear-gradient(135deg, #f8f9ff, #fff);
+  box-shadow: inset 3px 0 #5367c8, 0 4px 14px rgb(52 39 76 / 4%);
+}
+
+.metric-chip-cost {
+  border-color: #e9e3f4;
+  background: linear-gradient(135deg, #fbf9ff, #fff);
+  box-shadow: inset 3px 0 #9a80dc, 0 4px 14px rgb(52 39 76 / 4%);
+}
+
+.dashboard-inset {
+  border-color: #eee9f4;
+  background: #faf9fc;
+}
+
+.chart-surface {
+  border-color: #eee9f4;
+  background: linear-gradient(180deg, #fff 0%, #fdfcff 100%);
+}
+
+.weekly-table-scroll {
+  max-height: 350px;
+  scrollbar-color: #c8bdd8 #f7f4fa;
+  scrollbar-width: thin;
+}
+
+.weekly-table-scroll::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+.weekly-table-scroll::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: #f7f4fa;
+}
+
+.weekly-table-scroll::-webkit-scrollbar-thumb {
+  border: 2px solid #f7f4fa;
+  border-radius: 999px;
+  background: #c8bdd8;
+}
+
+.weekly-table-scroll thead th {
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  background: #f4efff;
+  box-shadow: 0 1px 0 #e8e3ef;
+}
+
+.weekly-table-scroll table {
+  min-width: 760px;
+}
+
+.weekly-table-row > td {
+  border-bottom: 1px solid #f0edf4;
+}
+
+.weekly-table-row:last-child > td {
+  border-bottom: 0;
+}
+
+.roas-heading {
+  color: #6842ce;
+}
+
+.roas-cell > div:first-child {
+  color: #5b3cc4;
+}
+
+.analysis-panel {
+  border-color: var(--report-border);
+  background: #fff;
+}
+
+.analysis-subsection {
+  border-color: #eee9f4;
+  background: #fbfaff;
+}
+
+.recommendation-section {
+  box-shadow: 0 8px 24px rgb(91 60 196 / 7%);
+}
+
+.driver-analysis-section {
+  padding: 28px;
+}
+
+.driver-analysis-header {
+  margin-bottom: 26px;
+}
+
+.driver-analysis-title {
+  margin-top: 4px;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.driver-analysis-description {
+  max-width: 72ch;
+  margin-top: 8px;
+  color: var(--muted-foreground);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.week-control-panel {
+  margin-bottom: 26px;
+  padding: 22px 24px;
+  border-radius: 16px;
+}
+
+.week-control-row label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.week-control-row select {
+  min-height: 48px;
+  padding: 0 16px;
+  border-radius: 11px;
+  font-size: 15px;
+}
+
+.week-control-row select:focus-visible {
+  outline: 3px solid rgb(124 77 255 / 18%);
+  outline-offset: 1px;
+}
+
+.week-comparison-copy {
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.selected-week-block {
+  margin-bottom: 30px;
+}
+
+.selected-week-heading {
+  margin-bottom: 14px;
+  font-size: 19px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.selected-kpi-grid {
+  gap: 16px;
+}
+
+.driver-analysis-section .metric-chip {
+  min-height: 144px;
+  padding: 22px;
+  border-radius: 16px;
+}
+
+.driver-analysis-section .metric-chip > div:first-child {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.driver-analysis-section .metric-chip > div:nth-child(2) {
+  margin-top: 14px;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.driver-analysis-section .metric-chip > div:last-child {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.driver-analysis-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.comparison-panel {
+  padding: 24px;
+  border-radius: 16px;
+}
+
+.comparison-heading {
+  margin-bottom: 16px;
+}
+
+.comparison-title {
+  font-size: 18px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.comparison-subtitle {
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.comparison-chart {
+  height: 350px;
+}
+
+.conclusion-panel {
+  padding: 24px;
+  border-radius: 16px;
+}
+
+.conclusion-title,
+.analysis-title {
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.conclusion-badge {
+  padding: 8px 12px;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.conclusion-copy {
+  max-width: 76ch;
+  margin-top: 16px;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.analysis-panel {
+  padding: 24px;
+  border-radius: 16px;
+}
+
+.analysis-subsections {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.analysis-subsection {
+  padding: 20px 22px;
+  border-radius: 14px;
+  border-left: 3px solid #e3d8ff;
+}
+
+.analysis-subsection-title {
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: 650;
+  line-height: 1.45;
+}
+
+.analysis-bullets {
+  margin-bottom: 12px;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.analysis-bullets li + li {
+  margin-top: 8px;
+}
+
+.analysis-paragraph {
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.recommendation-section {
+  margin-top: 32px;
+  padding: 28px;
+  border-radius: 20px;
+}
+
+.recommendation-header {
+  margin-bottom: 22px;
+}
+
+.recommendation-title {
+  margin-top: 5px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.recommendation-content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.recommendation-card {
+  padding: 20px;
+  border-radius: 14px;
+}
+
+.recommendation-subtitle {
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.recommendation-copy,
+.recommendation-list {
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.recommendation-list li + li {
+  margin-top: 14px;
+}
+
+.recommendation-list li::marker {
+  color: #6842ce;
+  font-weight: 700;
+}
+
+.dashboard-shell .text-slate-900 {
+  color: #252333;
+}
+
+.dashboard-shell .text-slate-700 {
+  color: #514e60;
+}
+
+.dashboard-shell .text-slate-600,
+.dashboard-shell .text-slate-500 {
+  color: var(--muted-foreground);
+}
+
+@media (max-width: 640px) {
+  .dashboard-shell {
+    min-height: calc(100vh - 2rem);
+    padding: 18px 14px;
+    border-radius: 22px;
+  }
+
+  .dashboard-section {
+    padding: 17px 14px;
+    border-radius: 17px;
+  }
+
+  .driver-analysis-section {
+    padding: 20px 16px;
+  }
+
+  .driver-analysis-title {
+    font-size: 24px;
+  }
+
+  .week-control-panel,
+  .comparison-panel,
+  .conclusion-panel,
+  .analysis-panel {
+    padding: 18px 16px;
+  }
+
+  .week-control-row select {
+    width: 100%;
+  }
+
+  .selected-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .driver-analysis-section .metric-chip {
+    min-height: 128px;
+    padding: 18px;
+  }
+
+  .driver-analysis-section .metric-chip > div:nth-child(2) {
+    font-size: 28px;
+  }
+
+  .comparison-chart {
+    height: 290px;
+    padding: 8px;
+  }
+
+  .analysis-subsection {
+    padding: 17px 16px;
+  }
+
+  .recommendation-section {
+    margin-top: 24px;
+    padding: 21px 16px;
+  }
+
+  .recommendation-title {
+    font-size: 22px;
+  }
+
+  .recommendation-card {
+    padding: 17px 15px;
+  }
+}
