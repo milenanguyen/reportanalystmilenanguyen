@@ -461,7 +461,7 @@ export default function Home() {
 
   const selectedWeek = selectedCampaignWeekly.find((week) => week.weekKey === selectedWeekKey) ?? selectedCampaignWeekly[0] ?? null;
   const selectedWeekIndex = selectedWeek ? selectedCampaignWeekly.findIndex((week) => week.weekKey === selectedWeek.weekKey) : -1;
-  const previousWeek = selectedWeekIndex > 0 ? selectedCampaignWeekly[selectedWeekIndex + 1] ?? null : null;
+  const previousWeek = selectedWeekIndex >= 0 ? selectedCampaignWeekly[selectedWeekIndex + 1] ?? null : null;
   const driverConclusion = buildDriverNarrative(selectedWeek, previousWeek);
   const campaignRecommendation = buildCampaignRecommendation(selectedWeek, previousWeek);
 
